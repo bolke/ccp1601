@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "removeComments": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "outDir": "lib",
+    "sourceMap": true,
+    "strict": true,
+    "allowJs": true,
+    "target": "es2017"
+  },
+  "compileOnSave": true,
+  "include": [
+    "src",
+  ],
+}
