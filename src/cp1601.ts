@@ -9,6 +9,11 @@ export class cp1601Lcd{
     }
 }
 
+export class cp1601Knob{
+    public buttonPressed: boolean = false;
+    public value: number = 0;
+}
+
 export class cp1601{
     static cmdPoll: number[] = [0x01];
     // command to write lcd's, send before cmdWriteLcd is send
@@ -51,8 +56,24 @@ export class cp1601{
     // turn knob is turned, with 4th byte is turn value
     static deviceTurnKnob: number[] = [0x82,0x03,0x11,0x00];
 
+    // all buttons
     public buttons: cp1601Lcd[] = [];
+    public turnKnob: cp1601Knob = new cp1601Knob();
+    
+    /**
+     * create all buttons
+     */
+    public constructor(){
+        for(let i=1;i<=16;i++){
+            this.buttons.push(new cp1601Lcd(i));
+        }
+    }
 
+    /**
+     * parse incoming data, and do something in response ... 
+     * @param data 
+     * @returns 
+     */
     public parse(data: number[]): boolean{
         switch(data[0]){
             case cp1601.deviceAck:
