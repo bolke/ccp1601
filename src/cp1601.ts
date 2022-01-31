@@ -1,3 +1,14 @@
+export class cp1601Lcd{
+    public position: number = 1;
+    public pixels: number[] = new Array(256).fill(0);
+    public color: number = 0x00;
+    public buttonPressed: boolean = false;
+
+    public constructor(position: number){
+        this.position=position;
+    }
+}
+
 export class cp1601{
     static cmdPoll: number[] = [0x01];
     // command to write lcd's, send before cmdWriteLcd is send
@@ -39,7 +50,9 @@ export class cp1601{
     static deviceTurnBtnDown: number[] = [0x82,0x01,0x11];
     // turn knob is turned, with 4th byte is turn value
     static deviceTurnKnob: number[] = [0x82,0x03,0x11,0x00];
-    
+
+    public buttons: cp1601Lcd[] = [];
+
     public parse(data: number[]): boolean{
         switch(data[0]){
             case cp1601.deviceAck:
