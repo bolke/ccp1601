@@ -50,11 +50,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-google", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:0.14.0"],
             ["eslint-plugin-import", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:2.25.4"],
             ["eslint-plugin-jest", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:24.7.0"],
-            ["firebase-functions-test", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:0.2.3"],
-            ["firestore-jest-mock", "npm:0.17.0"],
             ["humanize-duration", "npm:3.27.1"],
             ["jest", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:27.4.7"],
             ["luxon", "npm:2.3.0"],
+            ["net", "npm:1.0.2"],
             ["rimraf", "npm:3.0.2"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["uuid", "npm:8.3.2"]
@@ -1499,15 +1498,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD",
         }]
       ]],
-      ["@types/lodash", [
-        ["npm:4.14.178", {
-          "packageLocation": "./.yarn/cache/@types-lodash-npm-4.14.178-5433b9ed68-a69a04a60b.zip/node_modules/@types/lodash/",
-          "packageDependencies": [
-            ["@types/lodash", "npm:4.14.178"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
       ["@types/luxon", [
         ["npm:2.0.9", {
           "packageLocation": "./.yarn/cache/@types-luxon-npm-2.0.9-55d38b5ca8-6c99741e17.zip/node_modules/@types/luxon/",
@@ -2861,11 +2851,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-config-google", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:0.14.0"],
             ["eslint-plugin-import", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:2.25.4"],
             ["eslint-plugin-jest", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:24.7.0"],
-            ["firebase-functions-test", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:0.2.3"],
-            ["firestore-jest-mock", "npm:0.17.0"],
             ["humanize-duration", "npm:3.27.1"],
             ["jest", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:27.4.7"],
             ["luxon", "npm:2.3.0"],
+            ["net", "npm:1.0.2"],
             ["rimraf", "npm:3.0.2"],
             ["typescript", "patch:typescript@npm%3A4.5.5#~builtin<compat/typescript>::version=4.5.5&hash=493e53"],
             ["uuid", "npm:8.3.2"]
@@ -3704,43 +3693,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["find-up", "npm:4.1.0"],
             ["locate-path", "npm:5.0.0"],
             ["path-exists", "npm:4.0.0"]
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["firebase-functions-test", [
-        ["npm:0.2.3", {
-          "packageLocation": "./.yarn/cache/firebase-functions-test-npm-0.2.3-ae4a96f8bb-aee296f026.zip/node_modules/firebase-functions-test/",
-          "packageDependencies": [
-            ["firebase-functions-test", "npm:0.2.3"]
-          ],
-          "linkType": "SOFT",
-        }],
-        ["virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:0.2.3", {
-          "packageLocation": "./.yarn/__virtual__/firebase-functions-test-virtual-8791e0744d/0/cache/firebase-functions-test-npm-0.2.3-ae4a96f8bb-aee296f026.zip/node_modules/firebase-functions-test/",
-          "packageDependencies": [
-            ["firebase-functions-test", "virtual:d717efd9d930f17097e8fa8fde5c4ff82f28540ffc004c09fb5e10055480d72ef36a2eddda78b4b0da9a1474cea9c26ef19b308bb3af0b4ed469b004e0dc8cf1#npm:0.2.3"],
-            ["@types/firebase-admin", null],
-            ["@types/firebase-functions", null],
-            ["@types/lodash", "npm:4.14.178"],
-            ["firebase-admin", null],
-            ["firebase-functions", null],
-            ["lodash", "npm:4.17.21"]
-          ],
-          "packagePeers": [
-            "@types/firebase-admin",
-            "@types/firebase-functions",
-            "firebase-admin",
-            "firebase-functions"
-          ],
-          "linkType": "HARD",
-        }]
-      ]],
-      ["firestore-jest-mock", [
-        ["npm:0.17.0", {
-          "packageLocation": "./.yarn/cache/firestore-jest-mock-npm-0.17.0-f154c1ec55-dcaa5dac97.zip/node_modules/firestore-jest-mock/",
-          "packageDependencies": [
-            ["firestore-jest-mock", "npm:0.17.0"]
           ],
           "linkType": "HARD",
         }]
@@ -5597,6 +5549,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/negotiator-npm-0.6.3-9d50e36171-b8ffeb1e26.zip/node_modules/negotiator/",
           "packageDependencies": [
             ["negotiator", "npm:0.6.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["net", [
+        ["npm:1.0.2", {
+          "packageLocation": "./.yarn/cache/net-npm-1.0.2-1d5514df5b-d97e215d92.zip/node_modules/net/",
+          "packageDependencies": [
+            ["net", "npm:1.0.2"]
           ],
           "linkType": "HARD",
         }]
