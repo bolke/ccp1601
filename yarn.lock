@@ -848,13 +848,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4.14.104":
-  version: 4.14.178
-  resolution: "@types/lodash@npm:4.14.178"
-  checksum: a69a04a60bfc5257c3130a554b4efa0c383f0141b7b3db8ab7cf07ad2a46ea085fce66d0242da41da7e5647b133d5dfb2c15add9cbed8d7fef955e4a1e5b3128
-  languageName: node
-  linkType: hard
-
 "@types/luxon@npm:^2.0.5":
   version: 2.0.9
   resolution: "@types/luxon@npm:2.0.9"
@@ -1886,11 +1879,10 @@ __metadata:
     eslint-config-google: ^0.14.0
     eslint-plugin-import: ^2.22.0
     eslint-plugin-jest: ^24.4.2
-    firebase-functions-test: ^0.2.0
-    firestore-jest-mock: ^0.17.0
     humanize-duration: ^3.27.0
     jest: ^27.2.2
     luxon: ^2.0.2
+    net: ^1.0.2
     rimraf: ^3.0.2
     typescript: ^4.4.4
     uuid: ^8.3.2
@@ -2580,26 +2572,6 @@ __metadata:
     locate-path: ^5.0.0
     path-exists: ^4.0.0
   checksum: 4c172680e8f8c1f78839486e14a43ef82e9decd0e74145f40707cc42e7420506d5ec92d9a11c22bd2c48fb0c384ea05dd30e10dd152fefeec6f2f75282a8b844
-  languageName: node
-  linkType: hard
-
-"firebase-functions-test@npm:^0.2.0":
-  version: 0.2.3
-  resolution: "firebase-functions-test@npm:0.2.3"
-  dependencies:
-    "@types/lodash": ^4.14.104
-    lodash: ^4.17.5
-  peerDependencies:
-    firebase-admin: ">=6.0.0"
-    firebase-functions: ">=2.0.0"
-  checksum: aee296f0267b1910ece693aa774176b41903683562d20d67c4b7e76d2da6b024044c759384376856eaf5a6068f952cd680546c4343d637dd345b94a9558c9992
-  languageName: node
-  linkType: hard
-
-"firestore-jest-mock@npm:^0.17.0":
-  version: 0.17.0
-  resolution: "firestore-jest-mock@npm:0.17.0"
-  checksum: dcaa5dac97cab66667c0904e794ffc11258880bd4d0c4e8680e7da5354d31518c10cb4c4a8b18eccdcfc74aee54e3bf492091953ac42c95f5779f4a43c0d5757
   languageName: node
   linkType: hard
 
@@ -3997,7 +3969,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.15, lodash@npm:^4.17.4, lodash@npm:^4.17.5, lodash@npm:^4.7.0":
+"lodash@npm:^4.17.15, lodash@npm:^4.17.4, lodash@npm:^4.7.0":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -4258,6 +4230,13 @@ __metadata:
   version: 0.6.3
   resolution: "negotiator@npm:0.6.3"
   checksum: b8ffeb1e262eff7968fc90a2b6767b04cfd9842582a9d0ece0af7049537266e7b2506dfb1d107a32f06dd849ab2aea834d5830f7f4d0e5cb7d36e1ae55d021d9
+  languageName: node
+  linkType: hard
+
+"net@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "net@npm:1.0.2"
+  checksum: d97e215d922e87e9aa86e87daae73ce7f4e291f2d71365a115f2f51831b1add86e73584e944285daafcad4058c09bb85e33250da84834a26a83020740d45b4a1
   languageName: node
   linkType: hard
 
