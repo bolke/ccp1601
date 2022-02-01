@@ -139,6 +139,7 @@ export class cp1601{
     // turn knob is turned, with 4th byte is turn value
     static deviceTurnKnob: Uint8Array =  new Uint8Array([0x82,0x03,0x11,0x00]);    
 
+    public ready: boolean = true;
     // all buttons
     public buttons: cp1601Lcd[] = [];
     public turnKnob: cp1601Knob = new cp1601Knob();
@@ -163,6 +164,7 @@ export class cp1601{
         switch(data[0]){
             case cp1601.deviceAck: 
                 this.event.emit('ack');
+                this.ready = true;
                 break;
             case cp1601.deviceBtn:
                 if(data[2] >= 1 && data[2] <= 16){
@@ -193,6 +195,7 @@ export class cp1601{
                 break;
             case cp1601.deviceInfo:
                 this.event.emit('eventInfo',data);
+                this.ready = true;
                 break;            
             default:
                 return false;
