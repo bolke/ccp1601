@@ -1887,6 +1887,7 @@ __metadata:
     rimraf: ^3.0.2
     typescript: ^4.4.4
     uuid: ^8.3.2
+    win-audio: ^2.0.2
   languageName: unknown
   linkType: soft
 
@@ -5607,6 +5608,16 @@ __metadata:
   dependencies:
     string-width: ^1.0.2 || 2 || 3 || 4
   checksum: d5fc37cd561f9daee3c80e03b92ed3e84d80dde3365a8767263d03dacfc8fa06b065ffe1df00d8c2a09f731482fcacae745abfbb478d4af36d0a891fad4834d3
+  languageName: node
+  linkType: hard
+
+"win-audio@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "win-audio@npm:2.0.2"
+  dependencies:
+    node-gyp: latest
+  checksum: 11d1a4d67d1f616e82b5ece4f1a69225765942b944e3c6d7fd96cad67dbd81a2cea000701482cf0d87c9bce5892dcdf83b1618f1bf062d0cb145118b0784c911
+  conditions: os=win32
   languageName: node
   linkType: hard
 
