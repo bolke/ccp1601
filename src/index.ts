@@ -36,10 +36,13 @@ async function main(){
         }
         audio.set( (100 / 16) * data[2]);
         console.log(`audio ${audio.get()}`);
-                
-        await write(cp1601.cmdInitWriteLcd(1));        
-        await write(cp1601.cmdWriteLcd(data[2]));        
-        await write(new Uint8Array(pixels));        
+                    
+      //  let raw = new Uint8Array(6);
+      //  raw.set(cp1601.cmdInitWriteLcd(1));
+      //  raw.set(cp1601.cmdWriteLcd(data[2]),4);
+      //  await write(raw);
+        //await write(cp1601.cmdWriteLcd(data[2]));        
+      //  await write(new Uint8Array(pixels));        
     });
 
     panel.turnKnob.event.on('pressed',async (data) => {
