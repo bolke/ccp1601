@@ -114,10 +114,13 @@ export class cp1601{
     static noColor: number = 0x00;
     static darkBlueColor: number = 0x01;
     static blueColor: number = 0x02;
+    static fullBlueColor: number = this.darkBlueColor | this.blueColor;
     static darkGreenColor: number = 0x04;
     static greenColor: number = 0x08;
+    static fullGreenColor: number = this.darkGreenColor | this.greenColor;
     static darkRedColor: number = 0x10;
-    static redColor: number = 0x20;    
+    static redColor: number = 0x20; 
+    static fullRedColor: number = this.darkRedColor | this.redColor;   
     static fullColor: number = 0x3F;
     
     // send as acknowledgement to commands
@@ -165,26 +168,28 @@ export class cp1601{
                 if(data[2] >= 1 && data[2] <= 16){
                     this.buttons[data[2]-1].pressed = data[1] == 1;
                     if(data[1] == 1){
-                        this.buttons[data[2]-1].event.emit('pressed');
+                        this.buttons[data[2]-1].event.emit('pressed',data);
+                        this.event.emit('pressed',data);
                     }else{
-                        this.buttons[data[2]-1].event.emit('released');
+                        this.buttons[data[2]-1].event.emit('released',data);
+                        this.event.emit('released',data);
                     }
+                    this.lastButtonPressed = data[2];
                 }else if(data[2] == 17){  
                     this.turnKnob.pressed = data[1] == 1;
                     this.turnKnob.value = data[3];
                     if(data[1] == 1){
-                        this.turnKnob.event.emit('pressed');
+                        this.turnKnob.event.emit('pressed',data);
                     }else if(data[1] == 2){
-                        this.turnKnob.event.emit('released');
+                        this.turnKnob.event.emit('released',data);
                     }else if(data[1] == 3 || data[1] == 4){                        
                         this.turnKnob.turnDirection == data[1];                                                
                         if(data[1] == 3)
-                            this.turnKnob.event.emit('right',data[3]);
+                            this.turnKnob.event.emit('right',data);
                         else
-                            this.turnKnob.event.emit('left',data[3]);
+                            this.turnKnob.event.emit('left',data);
                     }
-                }
-                this.lastButtonPressed = data[2];                                                
+                }                
                 break;
             case cp1601.deviceInfo:
                 this.event.emit('eventInfo',data);
