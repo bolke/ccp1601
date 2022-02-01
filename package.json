@@ -9,7 +9,7 @@
     "leo": "eslint --ext .js,.ts . --fix --quiet",
     "lint": "eslint --ext .js,.ts .",
     "test": "jest",
-    "go": "yarn lib/index.js",
+    "go": "node lib/index.js",
     "full": "npm run build && npm run go"
   },
   "engines": {
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "cross-fetch": "^3.1.4",
+    "delay": "^5.0.0",
     "humanize-duration": "^3.27.0",
     "luxon": "^2.0.2",
     "net": "^1.0.2",
