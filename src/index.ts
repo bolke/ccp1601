@@ -42,7 +42,24 @@ async function main(){
     client.connect(2071,'192.168.1.112');
     client.on('data', function(data){
         panel.parse(data);
-    });    
+    });
+
+    panel.turnKnob.event.on('pressed',() => {
+        client.write(cp1601.cmdBeep(1));
+    });
+
+    panel.turnKnob.event.on('left', (data) => {        
+        let button = panel.lastButtonPressed-1;
+        panel.parse([0x82,0x01,button,0x00]);
+        panel.parse([0x82,0x02,button,0x00]);
+    });
+
+    panel.turnKnob.event.on('right', (data) => {        
+        let button = panel.lastButtonPressed+1;
+        panel.parse([0x82,0x01,button,0x00]);
+        panel.parse([0x82,0x02,button,0x00]);
+    });
+    
 
     for(let i=1;i<=16;i++){
         client.write(cp1601.cmdClearLcd(i));
@@ -50,7 +67,9 @@ async function main(){
     }
     
     let lastButton = 0;
-    while(true){        
+    while(true){  
+        client.write(cp1601.cmdPoll);
+        delay(10);    
         if(panel.lastButtonPressed != lastButton && panel.lastButtonPressed <= 16){
             if(lastButton>0)
                 client.write(cp1601.cmdClearLcd(lastButton));
@@ -62,7 +81,7 @@ async function main(){
             client.write(new Uint8Array(pacmanPixels));
             await delay(1);
         }
-
+/*
         let colorStack = [];
         for(let red=0;red<=255;red+=85){
             for(let green=0;green<=255;green+=85){
@@ -78,7 +97,7 @@ async function main(){
             let item = colorStack.pop()??{red:0,green:0,blue:0};
             await client.write(cp1601.cmdRgbColorLcd(lcdNr,item.red,item.green,item.blue));
             await delay(10);                              
-        }
+        }*/
     }    
 }
 

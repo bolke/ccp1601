@@ -1,8 +1,12 @@
+import {EventEmitter} from 'events';
+
 export class cp1601Lcd{
     public position: number = 1;
     public pixels: Uint8Array = new Uint8Array(256).fill(0);
     public color: number = 0x00;
     public pressed: boolean = false;
+
+    public event: EventEmitter = new EventEmitter();    
 
     public constructor(position: number){
         this.position=position;
@@ -10,8 +14,9 @@ export class cp1601Lcd{
 }
 
 export class cp1601Knob{
+    public event: EventEmitter = new EventEmitter();      
     public pressed: boolean = false;
-    public turnDirection: 3|4 = 3;
+    public turnDirection: 3|4 = 3; //left or right
     public value: number = 0;
 }
 
@@ -145,6 +150,7 @@ export class cp1601{
         }
     }
 
+    public event: EventEmitter = new EventEmitter();
     /**
      * parse incoming data, and do something in response ... 
      * @param data 
@@ -152,37 +158,40 @@ export class cp1601{
      */
     public parse(data: Uint8Array|number[]): boolean{
         switch(data[0]){
-            case cp1601.deviceAck:                
+            case cp1601.deviceAck: 
+                this.event.emit('ack');
                 break;
             case cp1601.deviceBtn:
                 if(data[2] >= 1 && data[2] <= 16){
-                    this.buttons[data[2]].pressed = data[1] == 1;
-                }else if(data[2] == 17){                    
-                    this.turnKnob.pressed  = data[1] == 1;
-                    if(data[1] == 3 || data[1] == 4){
-                        this.turnKnob.turnDirection == data[1];                        
+                    this.buttons[data[2]-1].pressed = data[1] == 1;
+                    if(data[1] == 1){
+                        this.buttons[data[2]-1].event.emit('pressed');
+                    }else{
+                        this.buttons[data[2]-1].event.emit('released');
                     }
+                }else if(data[2] == 17){  
+                    this.turnKnob.pressed = data[1] == 1;
                     this.turnKnob.value = data[3];
+                    if(data[1] == 1){
+                        this.turnKnob.event.emit('pressed');
+                    }else if(data[1] == 2){
+                        this.turnKnob.event.emit('released');
+                    }else if(data[1] == 3 || data[1] == 4){                        
+                        this.turnKnob.turnDirection == data[1];                                                
+                        if(data[1] == 3)
+                            this.turnKnob.event.emit('right',data[3]);
+                        else
+                            this.turnKnob.event.emit('left',data[3]);
+                    }
                 }
-                this.lastButtonPressed = data[2];
-                let logString = 'btn';
-                for(let i=0;i<data.length-1;i++){
-                    logString+=`${data[i]}:`;                    
-                }
-                logString+=`${data[data.length-1]}`;
-                console.log(logString);
+                this.lastButtonPressed = data[2];                                                
                 break;
-            case cp1601.deviceInfo:                
+            case cp1601.deviceInfo:
+                this.event.emit('eventInfo',data);
                 break;            
             default:
                 return false;
         }        
         return true;
-    }
-
-    public logData(data: Uint8Array|number[]){
-        for(let i=0;i<data.length;i++){
-            console.log(`${data[i]}`);
-        }
     }
 }
