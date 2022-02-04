@@ -39,6 +39,8 @@ async function main(){
     for(let i=1;i<=16;i++){
         await write(cp1601.cmdColorLcd(i,0x00),false);
     }
+
+    await write(cp1601.cmdSetSingleLcdMode(),false);
     panel.event.on('pressed', async(data) =>{        
         let oldButton = panel.lastButtonPressed;        
         audio.decrease(data[3]);           
