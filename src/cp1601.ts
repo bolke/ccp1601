@@ -36,10 +36,14 @@ export class cp1601{
     }    
 
     static cmdWriteSingleLcd(targetLcd: number, pixels: number[]){
-        let data = new Uint8Array(pixels.length + 6);
-        data.set([0x40,0x02,0x01,0x05,0x06,targetLcd]);
-        data.set(pixels,6);
+        let data = new Uint8Array(pixels.length + 2);
+        data.set([0x06,targetLcd]);
+        data.set(pixels,2);
         return data;
+    }
+
+    static cmdSetSingleLcdMode(){        
+        return new Uint8Array([0x40,0x02,0x01,0x05]);        
     }
 
     // target a specific lcd to write data, command followed by 256 data bytes
