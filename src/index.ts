@@ -80,12 +80,8 @@ async function main(){
         }
         audio.set( (100 / 16) * data[2]);
         console.log(`audio ${audio.get()}`);
-          
-        await write(cp1601.cmdWriteSingleLcd(data[2],pixels),false);
-        //let raw = new Uint8Array(pixels.length);
-        /*await write(cp1601.cmdInitWriteLcd(1),false);
-        await write(cp1601.cmdWriteLcd(data[2]),false);        
-        await write(new Uint8Array(pixels),false);*/        
+                  
+        await write(cp1601.cmdWriteSingleLcd(data[2],pixels),false);        
         await write(cp1601.cmdColorLcd(data[2],cp1601.greenColor));
     });
 
