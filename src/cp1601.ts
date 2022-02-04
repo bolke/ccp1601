@@ -21,8 +21,8 @@ export class cp1601Knob{
 }
 
 export class cp1601{
-    // polling command, needs to be done every ~5 seconds 
-    static cmdPoll: Uint8Array = new Uint8Array([0x01]);
+    // get status command, needs to be done every ~5 seconds 
+    static cmdStatus: Uint8Array = new Uint8Array([0x01]);
 
     // command to write lcd's, send before cmdWriteLcd is send
     // 3rd byte is amount of lcd's written
@@ -33,6 +33,13 @@ export class cp1601{
             lcdCount = 0x10;
 
         return new Uint8Array([0x40,0x20,lcdCount,0x50]);
+    }    
+
+    static cmdWriteSingleLcd(targetLcd: number, pixels: number[]){
+        let data = new Uint8Array(pixels.length + 6);
+        data.set([0x40,0x02,0x01,0x05,0x06,targetLcd]);
+        data.set(pixels,6);
+        return data;
     }
 
     // target a specific lcd to write data, command followed by 256 data bytes
@@ -104,10 +111,10 @@ export class cp1601{
     // clear lcd, 2nd byte is target lcd, start at 0x01
     static cmdClearLcd(targetLcd: number): Uint8Array{
         if(targetLcd<1)
-            targetLcd =1;
+            targetLcd = 1;
         else if(targetLcd>16)
             targetLcd=16;
-        return new Uint8Array([0x04,0x00]);
+        return new Uint8Array([0x04,targetLcd]);
     }
 
     // colors
@@ -128,7 +135,7 @@ export class cp1601{
     // starter for device button data
     static deviceBtn: number = 0x82;
     // probably device info
-    static deviceInfo: number = 0x81;
+    static deviceStatus: number = 0x81;
     // device lcd button is pressed, contains which lcd
     // 3rd byte is target lcd
     static deviceLcdBtn: Uint8Array =  new Uint8Array([0x82,0x01,0x00,0x00]);
@@ -165,7 +172,7 @@ export class cp1601{
             case cp1601.deviceAck: 
                 this.event.emit('ack');
                 this.ready = true;
-                break;
+                break;            
             case cp1601.deviceBtn:
                 if(data[2] >= 1 && data[2] <= 16){
                     this.buttons[data[2]-1].pressed = data[1] == 1;
@@ -193,8 +200,13 @@ export class cp1601{
                     }
                 }                
                 break;
-            case cp1601.deviceInfo:
-                this.event.emit('eventInfo',data);
+            case cp1601.deviceStatus:
+                // receive data is of the format:
+                // 0x81, 0x01, 0x04, 0x01, 0x00, 0x01
+                // 0x81 is device status id, next 3 bytes is probably version info,
+                // and last 2 are probably power indicators, which psu input is beeing used.
+                // needs to be verified.
+                this.event.emit('deviceStatus',data);
                 this.ready = true;
                 break;            
             default:
