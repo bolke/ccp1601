@@ -16,13 +16,61 @@ Sending a hex 0x01 requests status info of the device. The device will respond w
 containing some status information. I haven't figured out what's what, but it seems to be version info and 
 possibly information about the power supply, which is in use. 
 
-Server send
-[0x01]
-Panel response data
-[0x81, 0x01, 0x04, 0x01, 0x00, 0x00]
-### Reading button presses.
-### Reading knob presses.
-### Reading knob turns.
+Server send  
+*[0x01]*  
+Panel response  
+*[0x81, 0x01, 0x04, 0x01, 0x00, 0x00]*  
+### Receiving button presses.
+When a button is pressed, the panel will send a string containing information about which button is pressed
+or released. It does this for all 16 of the buttons, and the turn knob.
+In the example button 6 is pressed, but this could be any of the buttons, ranging from 0x01 to 0x0f (1-16).  
+  
+Button 6 is pressed, panel sends  
+*[0x82,0x01,0x06,0x00]*  
+Button 6 is released, panel sends  
+*[0x82,0x02,0x06,0x00]*  
+### Receiving knob presses.
+When pressed, the panel will send 
+*[0x82,0x01,0x10,0x00]*  
+  
+When released  
+*[0x82,0x02,0x10,0x00]*  
+
+So you've got 17 push buttons, of which the last one is a knob.  
+### Receiving knob turns.
+When the knob is turns, the panel will send the direction and force of the turn.  
+*[0x82,0x03,0x10,0x03]*  
+here the last value is the force of the turn. Small value, small turn, higher value, bit more 
+forcefull. Normally this is between 1 and 4, and bigger turns might turn it up to 10, 11, or higher. Who knows.
 ### Settings lcd colors.
-### Settling lcd data.
+3 byte command, first a 0x05, then the button number, 0x01 -> 0x0f (1-16), then a colour.
+Red green and blue each have 4 levels of brightness, off, dark, normal, bright. 
+
+``` // a colour list, these can be combined to create new colors, like Bob Ross did.   
+    static noColor: number = 0x00;
+    static darkBlueColor: number = 0x01;
+    static blueColor: number = 0x02;
+    static fullBlueColor: number = this.darkBlueColor | this.blueColor;
+    static darkGreenColor: number = 0x04;
+    static greenColor: number = 0x08;
+    static fullGreenColor: number = this.darkGreenColor | this.greenColor;
+    static darkRedColor: number = 0x10;
+    static redColor: number = 0x20; 
+    static fullRedColor: number = this.darkRedColor | this.redColor;   
+    static fullColor: number = 0x3F;
+```
+    
+Server sends button 4 to be red 
+*[0x05,0x04,0x20]*  
+Panel responds with
+*[0x84]* 
+
+The server responds to successfully send commands with a acknowledge, in the form of the byte 0x84
+It seems as if only the get status information commands has a different response. 
+If the sending of data for a commands hasn't been finished, the acknowledge won't show up. It'll only
+be send when the complete command has been send. 
+### Setting lcd data.
+<to be done, see code for now>
 ### Clearing lcd data.
+<to be done, see code for now>
+
