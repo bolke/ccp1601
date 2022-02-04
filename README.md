@@ -69,6 +69,14 @@ The server responds to successfully send commands with a acknowledge, in the for
 It seems as if only the get status information commands has a different response. 
 If the sending of data for a commands hasn't been finished, the acknowledge won't show up. It'll only
 be send when the complete command has been send. 
+### Beep
+Send beep command, with duration. Device does beep for a period of time ... amazing.
+The last byte send determines how long the beep lasts. More is longer. I don't know how long one unit is,
+but it feels like 1 == 100ms ... but that's a guess.  
+*[0x03,0x00,0x01]*  
+Panel goes beep and sends  
+*[0x84]*  
+
 ### Setting lcd data.
 <to be done, see code for now>
 ### Clearing lcd data.
