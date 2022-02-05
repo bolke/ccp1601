@@ -1,0 +1,305 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "979dcf7fded599f8",
+        "type": "tcp request",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "server": "192.168.1.112",
+        "port": "2071",
+        "out": "sit",
+        "ret": "buffer",
+        "splitc": " ",
+        "newline": "",
+        "tls": "",
+        "x": 1110,
+        "y": 440,
+        "wires": [
+            [
+                "1f24f8be495e6261",
+                "520592e41bcb2196"
+            ]
+        ]
+    },
+    {
+        "id": "1f24f8be495e6261",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "in",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1330,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "828dfb3b46f9f490",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "beep",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[\"0x03\",\"0x00\",\"0x01\"]",
+        "payloadType": "bin",
+        "x": 650,
+        "y": 440,
+        "wires": [
+            [
+                "979dcf7fded599f8"
+            ]
+        ]
+    },
+    {
+        "id": "fbc515a73ef83329",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "lcd color",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[\"0x05\",\"0x01\",\"0x00\"]",
+        "payloadType": "bin",
+        "x": 660,
+        "y": 360,
+        "wires": [
+            [
+                "137e0d3921fc8b09"
+            ]
+        ]
+    },
+    {
+        "id": "137e0d3921fc8b09",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "msg.payload[1] = (Math.random() * 16) + 1;\nmsg.payload[2] = (Math.random() * 64) +1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 360,
+        "wires": [
+            [
+                "979dcf7fded599f8",
+                "67be662129a92b3a"
+            ]
+        ]
+    },
+    {
+        "id": "67be662129a92b3a",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "e5f55899875acce2",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "get status",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[\"0x01\"]",
+        "payloadType": "bin",
+        "x": 670,
+        "y": 520,
+        "wires": [
+            [
+                "979dcf7fded599f8"
+            ]
+        ]
+    },
+    {
+        "id": "b673b22762a42a55",
+        "type": "inject",
+        "z": "f6f2187d.f17ca8",
+        "name": "clear lcd",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[\"0x04\",\"0x01\"]",
+        "payloadType": "bin",
+        "x": 660,
+        "y": 600,
+        "wires": [
+            [
+                "7f4370782cfb2d1a"
+            ]
+        ]
+    },
+    {
+        "id": "7f4370782cfb2d1a",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "msg.payload[1] = (Math.random() * 16) + 1;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 600,
+        "wires": [
+            [
+                "979dcf7fded599f8"
+            ]
+        ]
+    },
+    {
+        "id": "520592e41bcb2196",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "if(msg.payload[0] == 0x82){\n    msg.button = msg.payload[2]\n    msg.function = msg.payload[1];\n    msg.value = msg.payload[3];\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1340,
+        "y": 440,
+        "wires": [
+            [
+                "0333131867fe675e"
+            ]
+        ]
+    },
+    {
+        "id": "0333131867fe675e",
+        "type": "switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload[1]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "4",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 1510,
+        "y": 440,
+        "wires": [
+            [
+                "7db2252263f0d867"
+            ],
+            [
+                "9fc0e7fc74908495"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7db2252263f0d867",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "msg.payload = new Buffer([\"0x05\",msg.payload[2],\"0x04\"]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 240,
+        "wires": [
+            [
+                "979dcf7fded599f8"
+            ]
+        ]
+    },
+    {
+        "id": "9fc0e7fc74908495",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "func": "msg.payload = new Buffer([\"0x05\",msg.payload[2],\"0x10\"]);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 840,
+        "y": 300,
+        "wires": [
+            [
+                "979dcf7fded599f8"
+            ]
+        ]
+    }
+]
