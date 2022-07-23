@@ -82,6 +82,7 @@ Panel goes beep and sends
 
 ### Setting lcd data.
 <to be done, see code for now>
+See tools folder, imageconverter, for code to convert a bmp image to a hex array. pacman.bmp available as example.
 ### Clearing lcd data.
 <to be done, see code for now>
 
